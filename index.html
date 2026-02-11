@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#141e30,#243b55);
+position:relative;
+}
+
+/* Glow Background */
+.glow{
+position:absolute;
+width:600px;
+height:600px;
+border-radius:50%;
+filter:blur(140px);
+opacity:0.5;
+animation:moveGlow 12s infinite alternate ease-in-out;
+}
+
+.glow1{
+background:#ff6ec4;
+top:-200px;
+left:-200px;
+}
+
+.glow2{
+background:#7873f5;
+bottom:-200px;
+right:-200px;
+animation-delay:5s;
+}
+
+@keyframes moveGlow{
+from{transform:translate(0,0);}
+to{transform:translate(120px,80px);}
+}
+
+/* Sparkle Stars */
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0.6;
+animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+0%,100%{opacity:0.2; transform:scale(0.8);}
+50%{opacity:1; transform:scale(1.2);}
+}
+
+/* Card */
+.container{
+position:relative;
+padding:70px 55px;
+width:90%;
+max-width:520px;
+text-align:center;
+color:white;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.2);
+
+box-shadow:
+0 30px 80px rgba(0,0,0,0.6),
+inset 0 0 40px rgba(255,255,255,0.05);
+
+animation:fadeUp 1s ease;
+z-index:2;
+}
+
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(40px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* Question */
+.question{
+font-family:'Playfair Display',serif;
+font-size:30px;
+font-weight:600;
+margin-bottom:60px;
+}
+
+/* Buttons */
+.buttons{
+position:relative;
+height:130px;
+}
+
+button{
+padding:14px 38px;
+border-radius:40px;
+border:none;
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+position:absolute;
+transition:0.25s ease;
+}
+
+/* YES */
+#yesBtn{
+background:linear-gradient(135deg,#ff758f,#ff4d6d);
+color:white;
+left:25%;
+top:45px;
+box-shadow:0 8px 25px rgba(255,77,109,0.4);
+}
+
+#yesBtn:hover{
+transform:scale(1.12);
+box-shadow:0 12px 35px rgba(255,77,109,0.7);
+}
+
+/* NO */
+#noBtn{
+background:rgba(255,255,255,0.9);
+color:#333;
+left:55%;
+top:45px;
+}
+
+/* Love Page */
+.love-page{
+display:none;
+}
+
+.title{
+font-family:'Playfair Display',serif;
+font-size:32px;
+margin-bottom:30px;
+}
+
+.message{
+font-family:'Playfair Display',serif;
+font-size:24px;
+line-height:1.8;
+max-width:420px;
+margin:0 auto 25px auto;
+}
+
+.closing{
+font-size:18px;
+opacity:0.85;
+}
+
+/* Floating Hearts */
+.hearts{
+position:absolute;
+width:100%;
+height:100%;
+pointer-events:none;
+top:0;
+left:0;
+z-index:1;
+}
+
+.heart{
+position:absolute;
+color:#ff6ec4;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+from{transform:translateY(100vh); opacity:1;}
+to{transform:translateY(-10vh); opacity:0;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<div id="stars"></div>
+
+<!-- Question Page -->
+<div class="container" id="questionPage">
+<div class="question">
+Apakah kamu sayang sama aku? 🫣
+</div>
+
+<div class="buttons" id="buttonArea">
+<button id="yesBtn">Iya</button>
+<button id="noBtn">Tidak</button>
+</div>
+</div>
+
+<!-- Love Page -->
+<div class="container love-page" id="lovePage">
+
+<div class="title">
+Aku tahu jawabannya 😉
+</div>
+
+<div class="message">
+Terima kasih sudah memilih aku,
+dan semoga aku selalu jadi alasan
+kamu tersenyum setiap hari.
+</div>
+
+<div class="closing">
+By : Dany Christian Gultom
+</div>
+
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<audio id="bgMusic" loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
+<script>
+
+/* Generate Stars */
+for(let i=0;i<50;i++){
+const star=document.createElement("div");
+star.classList.add("star");
+star.style.top=Math.random()*100+"vh";
+star.style.left=Math.random()*100+"vw";
+star.style.animationDelay=Math.random()*3+"s";
+document.body.appendChild(star);
+}
+
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const questionPage=document.getElementById("questionPage");
+const lovePage=document.getElementById("lovePage");
+const container=document.getElementById("buttonArea");
+const hearts=document.getElementById("hearts");
+const music=document.getElementById("bgMusic");
+
+/* Tombol Tidak Lari */
+container.addEventListener("mousemove",function(e){
+
+const rect=noBtn.getBoundingClientRect();
+const dx=e.clientX-(rect.left+rect.width/2);
+const dy=e.clientY-(rect.top+rect.height/2);
+const distance=Math.sqrt(dx*dx+dy*dy);
+
+if(distance<140){
+
+const angle=Math.atan2(dy,dx);
+const escape=120;
+
+let newLeft=noBtn.offsetLeft-Math.cos(angle)*escape;
+let newTop=noBtn.offsetTop-Math.sin(angle)*escape;
+
+newLeft=Math.max(10,Math.min(container.clientWidth-noBtn.offsetWidth-10,newLeft));
+newTop=Math.max(10,Math.min(container.clientHeight-noBtn.offsetHeight-10,newTop));
+
+noBtn.style.left=newLeft+"px";
+noBtn.style.top=newTop+"px";
+}
+});
+
+/* Klik Iya */
+yesBtn.onclick=function(){
+questionPage.style.display="none";
+lovePage.style.display="block";
+music.volume=0.4;
+music.play();
+generateHearts();
+}
+
+/* Generate Hearts */
+function generateHearts(){
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+hearts.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},300);
+}
+
+</script>
+
+</body>
+</html>
